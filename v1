@@ -1,0 +1,90 @@
+package test;
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class ICS3U_FullCode_SamarQureshi {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("a:");
+		int a = input.nextInt();
+		System.out.println("b:");
+		int b = input.nextInt();
+		System.out.println("c:");
+		int c = input.nextInt();
+		
+		double x1 = (-b+(Math.sqrt(Math.pow(b, 2)-4*a*c)))/(2*a);
+		double x2 = (-b+(Math.sqrt(Math.pow(b, 2)-4*a*c)))/(2*a);
+		System.out.println(x1);
+		System.out.println(x2);
+		
+		//trinomial in the form ax^2+bx+c
+		
+	
+			if(a>1) { //complex trinomial
+				int n,m,f,g; //where (n*f)+(m*g) must be equal to 'b', n & m are factors of a and f & g are factors of c
+				for(int i = 1; i<=a; i++) { //find factor 1 of a
+		
+					for(int ii = -c; ii<=c; ii++) { //find factor 1 of c
+						if(ii!=0) {
+							if (a%i==0 && c%ii==0) { //checks if both are factors
+							n=i;
+							f=ii;	
+							m = a/n;
+							g = c/f;
+								if((n*f)+(m*g)==b) {
+									System.out.println("("+n+"x-"+f+")("+m+"x-"+g+")");
+								}
+						
+							}
+						}
+					}
+				
+				}
+			
+			}
+
+		
+		//display output of factored trinomial in the form (nx-f)(mx-g)
+			/*
+			 * trinomial.charAt(0)>58 &&
+
+trinomial.charAt(0)<49 && //checks to make sure a is a number between 1 and 9
+
+trinomial.charAt(5)>58 &&
+
+trinomial.charAt(5)<49 && //checks to make sure b is a number between 1 and 9
+
+trinomial.charAt(8)>58 &&
+
+trinomial.charAt(8)<49 && //checks to make sure c is a number between 1 and 9
+
+trinomial.charAt(2)!=94 &&
+
+trinomial.charAt(1)<97 &&
+
+trinomial.charAt(6)>122 &&
+
+trinomial.charAt(1)!=trinomial.charAt(6) &&
+
+trinomial.charAt(6)!=trinomial.charAt(9)&&
+
+trinomial.charAt(1)!=trinomial.charAt(9) //checks to make sure all the same letter variables are used
+			 int a = (trinomial.charAt(0)-48);
+
+System.out.println(a);
+
+int b = (trinomial.charAt(5)-48);
+
+System.out.println(b);
+
+int c = (trinomial.charAt(8)-48);
+
+System.out.println(c);
+			 */
+		
+	}
+}
