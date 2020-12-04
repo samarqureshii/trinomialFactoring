@@ -1,3 +1,10 @@
+
+/*
+ * Name: Samar Qureshi
+ * Date: December 4th, 2020
+ * Decription of program:
+ */
+
 package test;
 
 import java.util.Scanner;
@@ -13,26 +20,29 @@ public class ICS3U_FullCode_SamarQureshi {
 		
 		boolean keepGoing = true;
 		
-		System.out.println("Howdy there! I'm an AI robot developed to help you cheat on your math homework! "
-				+ "\nMy specialty, you ask? I'm an expert at solving and factoring quadratics."
-				+ "\nLet's get started by having you enter your trinomial in the form ax^2+bx+c.");
+		System.out.println("Howdy there! I'm an AI robot developed to help you cheat on your toughest math homework! "
+				+ "\nMy specialty, you ask? "
+				+ "\nI'm an expert at solving and factoring quadratics."
+				+ "\n\nLet's get started by having you enter your trinomial in the form ax^2+bx+c."
+				+ "\n'x' can be replaced with any lowercase letter, just make sure you stay consistent!");
 		
 		while(keepGoing) { 
 		String trinomial = input.nextLine();
 		
-		int index = 0, digit = 1, letterIndex = 0;
+		int index = 0, digit = 1;
 		boolean neg = false;
 		 //starts pulling a, b, c from the trinomial entered
+		
 		//check sign of a
-		if(trinomial.charAt(0)=='-') {
+		if(trinomial.charAt(0)==45) { //45 is ASCII for '-'
 			index = 1;
 			neg = true;
 		}
 		
 		//to pull a
 		int a = 0;
-		while(trinomial.charAt(index)!='x') {
-			digit = trinomial.charAt(index) - '0'; //removing the digit to give ASCII decimal
+		while(trinomial.charAt(index)>=48 && trinomial.charAt(index)<=57) {
+			digit = trinomial.charAt(index) - 48; //removing the digit to give ASCII decimal
 			a*=10;
 			a+= digit;
 			index +=1;
@@ -42,15 +52,23 @@ public class ICS3U_FullCode_SamarQureshi {
 			a *= -1;
 		}
 		
-		//so the code will skip over x^2 and prepare if b is negative
+		//determines what letter variable is used at the first index
+		char letter = (trinomial.charAt(index));
+		
+		if(trinomial.charAt(index+1)!=94) { //checks if the "^" char is used
+			System.out.println("Looks like you forgot to add the '^' "
+					+ "character to signify an exponent. ");
+		}
+		
+		//so the number index will skip over x^2 and prepare if b is negative	
 		index+=3;
-		neg = trinomial.charAt(index) == '-';
+		neg = trinomial.charAt(index) == 45; //45 is ascii for '-'
 		index+=1;
 		
 		//to pull 'b'
 		int b = 0;
-		while(trinomial.charAt(index)!='x') {
-			digit = trinomial.charAt(index)- '0';
+		while(trinomial.charAt(index) >= 48 && trinomial.charAt(index) <= 57) { 
+			digit = trinomial.charAt(index)-48;
 			b*=10;
 			b+=digit;
 			index +=1;
@@ -60,16 +78,23 @@ public class ICS3U_FullCode_SamarQureshi {
 			b*=-1;
 		}
 		
+		if(trinomial.charAt(index)!=(int)letter) {
+			do{ System.out.println("I'm not sure if the variables you used match. "
+					+ "\nPlease enter the lower case letter you would like to use as a variable:");
+			letter = input.next().charAt(0);
+			}while((int)letter<=97 || (int)letter>=122);
+		}
 		
-		//skip over 'x' and prepare if c is negative
+		
+		//number index "skips" over 'x' and prepare if c is negative
 		index +=1;
-		neg = trinomial.charAt(index) == '-';
+		neg = trinomial.charAt(index) == 45;
 		index+=1;
 		
 		//to pull 'c'
 		int c = 0;
 		while(index < trinomial.length()) {
-			digit = trinomial.charAt(index) - '0';
+			digit = trinomial.charAt(index)-48; //ascii conversion
 			c*=10;
 			c+=digit;
 			index +=1;
@@ -96,17 +121,18 @@ public class ICS3U_FullCode_SamarQureshi {
 							n=i; 
 							f=ii;	
 							m = a/n;
-							g = c/f; //for loop variables are transferred to variables in the factored format
+							g = c/f; //the 'for loop' variables are transferred to variables in the factored format
 								if((n*f)+(m*g)==b) { //if trinomial is factorable
 									if(n==m && f==g) { //double root case
+										//following lines will 'slow build' the factored form based on certain conditions such as the sign of f and g
 										System.out.print("The factored form of your trinomial is: (");
 										if(n!=1) {
 											System.out.print(n);
 										}	
-										if(f>0) {
-											System.out.print("x+");
+										if(g>0) {
+											System.out.print(letter+"+");
 										}
-										System.out.print(f+")^2");
+										System.out.print(g+")^2");
 										
 									}
 									
@@ -116,19 +142,19 @@ public class ICS3U_FullCode_SamarQureshi {
 										if(n!=1) {
 											System.out.print(n);
 										}	
-										if(f>0) {
-											System.out.print("x+");
+										if(g>0) {
+											System.out.print(letter+"+");
 										}
-										System.out.print(f+")(");
+										System.out.print(g+")(");
 										
 										if(m!=1) {
 											System.out.print(m);
 										}
 										
-										if (g>0) {
-											System.out.print("x+");
+										if (f>0) {
+											System.out.print(letter+"+");
 										}
-										System.out.print(g+")");
+										System.out.println(f+")");
 									}
 				
 							}
@@ -153,31 +179,41 @@ public class ICS3U_FullCode_SamarQureshi {
 							+ "\nI don't think I can do this...");
 				}
 				else if(x1==x2 || (Math.pow(b, 2)-4*a*c)==0) {
-					System.out.println("\nThere seems to only be 1 solution to this. "
+					System.out.println("\nAssuming that your trinomial is equal to 0, there seems to only be 1 solution to this. "
 							+ "\nAccording to my calculations, if we were to graph this,"
 							+ "there would be a 'double root' at "+decimal.format(x1)+".");
 					}
 				else {
-					System.out.println("\nThere appears to be 2 solutions to this. "
+					System.out.println("\nAssuming that your trinomial is equal to 0, there appears to be 2 solutions to this. "
 							+ "\nIf I'm correct, there are roots at "+decimal.format(x1)+" and at "+decimal.format(x2)+
 							", if we were to graph this.");
 				}
 				
 				System.out.println("\nWould you like to enter another trinomial? If so, type yes."
 						+ "\nIf you are done, please type no.");
-				trinomial = input.nextLine();
+				String yesOrNo = input.nextLine();
 				
 				
-				if(trinomial.equalsIgnoreCase("no")) {
+				if(yesOrNo.equalsIgnoreCase("yes")) {
+					System.out.println("I would be more than happy to factor another trinomial for you! "
+							+ "\nPlease enter the next trinomial:");
+				}
+				else if (yesOrNo.equalsIgnoreCase("no")){
 					keepGoing = false;
 				}
-				else if(trinomial.equalsIgnoreCase("yes")) {
-					System.out.println("Thanks for staying! "
-							+ "\nPlease enter the next trinomial:");
+				
+				else {
+					while(!yesOrNo.equalsIgnoreCase("yes")|| !yesOrNo.equalsIgnoreCase("no")) {
+						System.out.println("That is not a valid answer! Please enter yes or no.");
+						yesOrNo = input.next();
+					}
+					if(yesOrNo.equalsIgnoreCase("no")) {
+						keepGoing = false;
+					}
 				}
 				
 			
-		}
+			}
 		
 		System.out.println("Well, it's been fun, partner. "
 				+ "\nI hope I was able to solve all your questions!"
