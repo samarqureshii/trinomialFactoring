@@ -8,6 +8,7 @@
 package test;
 
 import java.util.Scanner;
+
 import java.lang.Math;
 import java.text.NumberFormat;
 
@@ -55,9 +56,9 @@ public class ICS3U_FullCode_SamarQureshi {
 		//determines what letter variable is used at the first index
 		char letter = (trinomial.charAt(index));
 		
-		if(trinomial.charAt(index+1)!=94) { //checks if the "^" char is used
-			System.out.println("Looks like you forgot to add the '^' "
-					+ "character to signify an exponent. ");
+		if(trinomial.charAt(index+2)!=50) { //checks if the polynomial is quadratic, and not cubic, quartic, etc
+			System.out.println("Oops! This trinomial is not quadratic. "
+					+ "No worries though, we will fix that for you. ");
 		}
 		
 		//so the number index will skip over x^2 and prepare if b is negative	
@@ -123,8 +124,8 @@ public class ICS3U_FullCode_SamarQureshi {
 							m = a/n;
 							g = c/f; //the 'for loop' variables are transferred to variables in the factored format
 								if((n*f)+(m*g)==b) { //if trinomial is factorable
+									//following lines will 'slow build' the factored form based on certain conditions such as the sign of f and g
 									if(n==m && f==g) { //double root case
-										//following lines will 'slow build' the factored form based on certain conditions such as the sign of f and g
 										System.out.print("The factored form of your trinomial is: (");
 										if(n!=1) {
 											System.out.print(n);
@@ -133,7 +134,7 @@ public class ICS3U_FullCode_SamarQureshi {
 											System.out.print(letter+"+");
 										}
 										System.out.print(g+")^2");
-										
+										//final product is factored form in (nx+g)^2								
 									}
 									
 									
@@ -155,6 +156,7 @@ public class ICS3U_FullCode_SamarQureshi {
 											System.out.print(letter+"+");
 										}
 										System.out.println(f+")");
+										//final product is factored form in (nx+g)(mx+f)
 									}
 				
 							}
@@ -203,13 +205,15 @@ public class ICS3U_FullCode_SamarQureshi {
 				}
 				
 				else {
-					while(!yesOrNo.equalsIgnoreCase("yes")|| !yesOrNo.equalsIgnoreCase("no")) {
+					do {
 						System.out.println("That is not a valid answer! Please enter yes or no.");
 						yesOrNo = input.next();
-					}
+					}while(!yesOrNo.equalsIgnoreCase("yes") && !yesOrNo.equalsIgnoreCase("no"));
+					
 					if(yesOrNo.equalsIgnoreCase("no")) {
 						keepGoing = false;
 					}
+				
 				}
 				
 			
