@@ -2,7 +2,11 @@
 /*
  * Name: Samar Qureshi
  * Date: December 4th, 2020
- * Decription of program:
+ * Decription of program: This program allows the user to input a trinomial of degree 2, 
+ * and will display the factored form of the quadratic. Regardless if the trinomial is
+ * factorable or not, the program will also display the number of solutions, along with
+ * where the solutions are located on the x-axis (if it were graphed), and which way it opens. 
+ * Additionally, user is able to enter more than one trinomial if they wish.
  */
 
 package test;
@@ -23,9 +27,15 @@ public class ICS3U_FullCode_SamarQureshi {
 		
 		System.out.println("Howdy there! I'm an AI robot developed to help you cheat on your toughest math homework! "
 				+ "\nMy specialty, you ask? "
-				+ "\nI'm an expert at solving and factoring quadratics."
+				+ "\nI'm an expert at solving and factoring quadratics. "
+				+ "\n\nBefore we start, what's your name, pal?");
+		String name = input.next();
+		
+		
+		System.out.println("Nice to meet you, "+name+"!"
 				+ "\n\nLet's get started by having you enter your trinomial in the form ax^2+bx+c."
-				+ "\n'x' can be replaced with any lowercase letter, just make sure you stay consistent!");
+				+ "\n'x' can be replaced with any lowercase letter, just make sure you stay consistent!"
+				+ "\n If the coefficient of your variable is 1, please enter it as 1.");
 		
 		while(keepGoing) { 
 		String trinomial = input.nextLine();
@@ -48,6 +58,7 @@ public class ICS3U_FullCode_SamarQureshi {
 			a+= digit;
 			index +=1;
 		}
+		
 		// if a is negative
 		if(neg) {
 			a *= -1;
@@ -80,7 +91,7 @@ public class ICS3U_FullCode_SamarQureshi {
 		}
 		
 		if(trinomial.charAt(index)!=(int)letter) {
-			do{ System.out.println("I'm not sure if the variables you used match. "
+			do{ System.out.println(name + " ,I'm not sure if the variables you used match. "
 					+ "\nPlease enter the lower case letter you would like to use as a variable:");
 			letter = input.next().charAt(0);
 			}while((int)letter<=97 || (int)letter>=122);
@@ -105,14 +116,6 @@ public class ICS3U_FullCode_SamarQureshi {
 			c *= -1;
 		}
 			
-		
-		System.out.println("a:"+a);
-		System.out.println("b:"+b);
-		System.out.println("c:"+c);
-		
-		//trinomial in the form ax^2+bx+c
-		
-	
 			 //takes care of both simple and complex trinomials
 				int n,m,f,g; //where (n*f)+(m*g) must be equal to 'b', n & m are factors of a and f & g are factors of c
 				for(int i = 1; i<=Math.abs(a); i++) { //finds factors of a
@@ -124,9 +127,12 @@ public class ICS3U_FullCode_SamarQureshi {
 							m = a/n;
 							g = c/f; //the 'for loop' variables are transferred to variables in the factored format
 								if((n*f)+(m*g)==b) { //if trinomial is factorable
+									i=Math.abs(a);
+									ii=Math.abs(c); //prevents the factors from printing more than once
+									
 									//following lines will 'slow build' the factored form based on certain conditions such as the sign of f and g
 									if(n==m && f==g) { //double root case
-										System.out.print("The factored form of your trinomial is: (");
+										System.out.print("The factored form of "+name+"'s trinomial is: (");
 										if(n!=1) {
 											System.out.print(n);
 										}	
@@ -139,7 +145,7 @@ public class ICS3U_FullCode_SamarQureshi {
 									
 									
 									else {
-										System.out.print("The factored form of your trinomial is: (");
+										System.out.print("The factored form of"+name+"'s trinomial is: (");
 										if(n!=1) {
 											System.out.print(n);
 										}	
@@ -177,7 +183,7 @@ public class ICS3U_FullCode_SamarQureshi {
 				double x2 = (-b-(Math.sqrt(Math.pow(b, 2)-4*a*c)))/(2*a);
 				
 				if((Math.pow(b, 2)-4*a*c)<0) {
-					System.out.println("\nOh no! The solutions to this are imaginary numbers. "
+					System.out.println("\nOh no, "+name+"! The solutions to this are imaginary numbers. "
 							+ "\nI don't think I can do this...");
 				}
 				else if(x1==x2 || (Math.pow(b, 2)-4*a*c)==0) {
@@ -191,13 +197,21 @@ public class ICS3U_FullCode_SamarQureshi {
 							", if we were to graph this.");
 				}
 				
+				if(a<0) {
+					System.out.println("\nThe quadratic would  open downwards.");
+				}
+				
+				else if(a>0) {
+					System.out.println("\nThe quadratic would open upwards.");
+				}
+				
 				System.out.println("\nWould you like to enter another trinomial? If so, type yes."
 						+ "\nIf you are done, please type no.");
 				String yesOrNo = input.nextLine();
 				
 				
 				if(yesOrNo.equalsIgnoreCase("yes")) {
-					System.out.println("I would be more than happy to factor another trinomial for you! "
+					System.out.println("I would be more than happy to factor another trinomial for you, "+name
 							+ "\nPlease enter the next trinomial:");
 				}
 				else if (yesOrNo.equalsIgnoreCase("no")){
@@ -219,82 +233,10 @@ public class ICS3U_FullCode_SamarQureshi {
 			
 			}
 		
-		System.out.println("Well, it's been fun, partner. "
+		System.out.println("Well, it's been fun, "+name+"."
 				+ "\nI hope I was able to solve all your questions!"
 				+ "\nIf you ever need to solve some trinomials again, come back to me anytime!"
 				+ "\n\nNot that I would ever condone cheating or anything like that...");
-			
-
-		
-		
-		//if trinomial is factorable
-		/*
-		 * if(n==1 && m>1) { //coefficient of x is only 1 for n
-			System.out.println("The factored form of your trinomial is: "
-					+ "(x+"+f+")("+m+"x+"+g+")");
-		}
-		else if(n>1 && m==1) { //coefficient of x is 1 only for m
-			System.out.println("The factored form of your trinomial is: "
-					+ "("+n+"x+"+f+")(x+"+g+")");
-		}
-		else if(n==1 && m==1) { //coefficient of x if 1 for both 
-			System.out.println("The factored form of your trinomial is: "
-					+ "(x+"+f+")(x+"+g+")");
-		}
-		else if(n==m && f==g) { //double root case
-			System.out.println("The factored form of your trinomial is: "
-					+ "("+n+"x+"+f+")^2");
-		}
-		else { // n and m are more than 1
-			System.out.println("The factored form of your trinomial is: "
-					+ "("+n+"x+"+f+")("+m+"x+"+g+")");
-		}
-		 */
-		
-		
-		
-		/*
-		 * System.out.println("(x-"+x1+")");
-			System.out.println("(x-"+x2+")");
-		 */
-			
-		//display output of factored trinomial in the form (nx-f)(mx-g)
-			/*
-			 * trinomial.charAt(0)>58 &&
-
-trinomial.charAt(0)<49 && //checks to make sure a is a number between 1 and 9
-
-trinomial.charAt(5)>58 &&
-
-trinomial.charAt(5)<49 && //checks to make sure b is a number between 1 and 9
-
-trinomial.charAt(8)>58 &&
-
-trinomial.charAt(8)<49 && //checks to make sure c is a number between 1 and 9
-
-trinomial.charAt(2)!=94 &&
-
-trinomial.charAt(1)<97 &&
-
-trinomial.charAt(6)>122 &&
-
-trinomial.charAt(1)!=trinomial.charAt(6) &&
-
-trinomial.charAt(6)!=trinomial.charAt(9)&&
-
-trinomial.charAt(1)!=trinomial.charAt(9) //checks to make sure all the same letter variables are used
-			 int a = (trinomial.charAt(0)-48);
-
-System.out.println(a);
-
-int b = (trinomial.charAt(5)-48);
-
-System.out.println(b);
-
-int c = (trinomial.charAt(8)-48);
-
-System.out.println(c);
-			 */
-		
+	
 	}
 }
