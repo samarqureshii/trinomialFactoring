@@ -23,21 +23,16 @@ public class ICS3U_FullCode_SamarQureshi {
 		Scanner input = new Scanner(System.in);
 		NumberFormat decimal = NumberFormat.getNumberInstance();
 		
-		boolean keepGoing = true;
-		
 		System.out.println("Howdy there! I'm an AI robot developed to help you cheat on your toughest math homework! "
 				+ "\nMy specialty, you ask? "
 				+ "\nI'm an expert at solving and factoring quadratics. "
-				+ "\n\nBefore we start, what's your name, pal?");
-		String name = input.next();
-		
-		
-		System.out.println("Nice to meet you, "+name+"!"
-				+ "\n\nLet's get started by having you enter your trinomial in the form ax^2+bx+c."
+				+"\n\nLet's get started by having you enter your trinomial in the form ax^2+bx+c."
 				+ "\n'x' can be replaced with any lowercase letter, just make sure you stay consistent!"
 				+ "\n If the coefficient of your variable is 1, please enter it as 1.");
 		
-		while(keepGoing) { 
+		boolean keepGoing = true; 
+		
+		while(keepGoing) { //will continue to run if the user wants to enter more trinomials
 		String trinomial = input.nextLine();
 		
 		int index = 0, digit = 1;
@@ -90,8 +85,8 @@ public class ICS3U_FullCode_SamarQureshi {
 			b*=-1;
 		}
 		
-		if(trinomial.charAt(index)!=(int)letter) {
-			do{ System.out.println(name + " ,I'm not sure if the variables you used match. "
+		if(trinomial.charAt(index)!=(int)letter) { //if the letter variables do not match
+			do{ System.out.println("I'm not sure if the variables you used match. "
 					+ "\nPlease enter the lower case letter you would like to use as a variable:");
 			letter = input.next().charAt(0);
 			}while((int)letter<=97 || (int)letter>=122);
@@ -116,7 +111,7 @@ public class ICS3U_FullCode_SamarQureshi {
 			c *= -1;
 		}
 			
-			 //takes care of both simple and complex trinomials
+			//takes care of both simple and complex trinomials
 				int n,m,f,g; //where (n*f)+(m*g) must be equal to 'b', n & m are factors of a and f & g are factors of c
 				for(int i = 1; i<=Math.abs(a); i++) { //finds factors of a
 					for(int ii = -Math.abs(c); ii<=Math.abs(c); ii++) { //finds factors of c
@@ -132,7 +127,7 @@ public class ICS3U_FullCode_SamarQureshi {
 									
 									//following lines will 'slow build' the factored form based on certain conditions such as the sign of f and g
 									if(n==m && f==g) { //double root case
-										System.out.print("The factored form of "+name+"'s trinomial is: (");
+										System.out.print("The factored form of your trinomial is: (");
 										if(n!=1) {
 											System.out.print(n);
 										}	
@@ -145,7 +140,7 @@ public class ICS3U_FullCode_SamarQureshi {
 									
 									
 									else {
-										System.out.print("The factored form of"+name+"'s trinomial is: (");
+										System.out.print("The factored form of trinomial is: (");
 										if(n!=1) {
 											System.out.print(n);
 										}	
@@ -156,6 +151,10 @@ public class ICS3U_FullCode_SamarQureshi {
 										
 										if(m!=1) {
 											System.out.print(m);
+										}
+										
+										if(f<0) {
+											System.out.print(letter);
 										}
 										
 										if (f>0) {
@@ -183,7 +182,7 @@ public class ICS3U_FullCode_SamarQureshi {
 				double x2 = (-b-(Math.sqrt(Math.pow(b, 2)-4*a*c)))/(2*a);
 				
 				if((Math.pow(b, 2)-4*a*c)<0) {
-					System.out.println("\nOh no, "+name+"! The solutions to this are imaginary numbers. "
+					System.out.println("\nOh no! The solutions to this are imaginary numbers. "
 							+ "\nI don't think I can do this...");
 				}
 				else if(x1==x2 || (Math.pow(b, 2)-4*a*c)==0) {
@@ -197,13 +196,13 @@ public class ICS3U_FullCode_SamarQureshi {
 							", if we were to graph this.");
 				}
 				
-				if(a<0) {
-					System.out.println("\nThe quadratic would  open downwards.");
-				}
+					if(a<0) {
+						System.out.println("\nThe parabola would  open downwards.");
+					}
 				
-				else if(a>0) {
-					System.out.println("\nThe quadratic would open upwards.");
-				}
+					else if(a>0) {
+						System.out.println("\nThe parabola would open upwards.");
+					}
 				
 				System.out.println("\nWould you like to enter another trinomial? If so, type yes."
 						+ "\nIf you are done, please type no.");
@@ -211,7 +210,7 @@ public class ICS3U_FullCode_SamarQureshi {
 				
 				
 				if(yesOrNo.equalsIgnoreCase("yes")) {
-					System.out.println("I would be more than happy to factor another trinomial for you, "+name
+					System.out.println("I would be more than happy to factor another trinomial for you, "
 							+ "\nPlease enter the next trinomial:");
 				}
 				else if (yesOrNo.equalsIgnoreCase("no")){
@@ -233,7 +232,7 @@ public class ICS3U_FullCode_SamarQureshi {
 			
 			}
 		
-		System.out.println("Well, it's been fun, "+name+"."
+		System.out.println("Well, it's been fun, pal."
 				+ "\nI hope I was able to solve all your questions!"
 				+ "\nIf you ever need to solve some trinomials again, come back to me anytime!"
 				+ "\n\nNot that I would ever condone cheating or anything like that...");
